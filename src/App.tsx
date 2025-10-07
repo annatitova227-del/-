@@ -15,6 +15,9 @@ import TabNavigator from './TabNavigator';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+
+  
   return (
     <SafeAreaProvider>
       <NavigationContainer>
