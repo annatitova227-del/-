@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Alert} from 'react-native';
 import {RNCamera} from 'react-native-camera';
 
-export default function Scanner({navigation}) {
+export default function Scanner({navigation}: any) {
   const [scanned, setScanned] = useState(false);
 
-  const handleBarCodeScanned = ({data}) => {
+  const handleBarCodeScanned = ({data}: any) => {
     if (!scanned) {
       setScanned(true);
       Alert.alert('QR Code Scanned', `Data: ${data}`, [

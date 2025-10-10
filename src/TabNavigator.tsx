@@ -12,32 +12,32 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 const Tab = createBottomTabNavigator();
 
 // Компоненты иконок
-const HomeIcon = ({color}) => (
+const HomeIcon = ({color}: {color: string}) => (
   <Text style={[styles.iconText, {color}]}>🏠</Text>
 );
 
-const SearchIcon = ({color}) => (
+const SearchIcon = ({color}: {color: string}) => (
   <Text style={[styles.iconText, {color}]}>🔍</Text>
 );
 
-const QRCodeIcon = ({color}) => (
+const QRCodeIcon = ({color}: {color: string}) => (
   <Text style={[styles.iconText, {color}]}>📷</Text>
 );
 
-const ProfileIcon = ({color}) => (
+const ProfileIcon = ({color}: {color: string}) => (
   <Text style={[styles.iconText, {color}]}>👤</Text>
 );
 
-const ScannerIcon = ({color}) => (
+const ScannerIcon = ({color}: {color: string}) => (
   <Text style={[styles.iconText, {color}]}>📸</Text>
 );
 
 // Функции для tabBarIcon
-const homeIcon = ({color}) => <HomeIcon color={color} />;
-const searchIcon = ({color}) => <SearchIcon color={color} />;
-const qrCodeIcon = ({color}) => <QRCodeIcon color={color} />;
-const profileIcon = ({color}) => <ProfileIcon color={color} />;
-const scannerIcon = ({color}) => <ScannerIcon color={color} />;
+const homeIcon = ({color}: {color: string}) => <HomeIcon color={color} />;
+const searchIcon = ({color}: {color: string}) => <SearchIcon color={color} />;
+const qrCodeIcon = ({color}: {color: string}) => <QRCodeIcon color={color} />;
+const profileIcon = ({color}: {color: string}) => <ProfileIcon color={color} />;
+const scannerIcon = ({color}: {color: string}) => <ScannerIcon color={color} />;
 
 const styles = StyleSheet.create({
   container: {
