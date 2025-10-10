@@ -1,71 +1,122 @@
-// src/TabNavigator.tsx
+
 import React from 'react';
-import { Text } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Text, View, StyleSheet} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import QRCodeScreen from './screens/QRCodeScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import UserProfileScreen from './UserProfileScreen'; // Просто импортируем, но не добавляем в навигацию
+import Scanner from './screens/Scanner';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
+// Компоненты иконок
+const HomeIcon = ({color}) => (
+  <Text style={[styles.iconText, {color}]}>🏠</Text>
+);
+
+const SearchIcon = ({color}) => (
+  <Text style={[styles.iconText, {color}]}>🔍</Text>
+);
+
+const QRCodeIcon = ({color}) => (
+  <Text style={[styles.iconText, {color}]}>📷</Text>
+);
+
+const ProfileIcon = ({color}) => (
+  <Text style={[styles.iconText, {color}]}>👤</Text>
+);
+
+const ScannerIcon = ({color}) => (
+  <Text style={[styles.iconText, {color}]}>📸</Text>
+);
+
+// Функции для tabBarIcon
+const homeIcon = ({color}) => <HomeIcon color={color} />;
+const searchIcon = ({color}) => <SearchIcon color={color} />;
+const qrCodeIcon = ({color}) => <QRCodeIcon color={color} />;
+const profileIcon = ({color}) => <ProfileIcon color={color} />;
+const scannerIcon = ({color}) => <ScannerIcon color={color} />;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  iconText: {
+    fontSize: 24,
+  },
+});
+
 export default function TabNavigator() {
-    return (
-        <Tab.Navigator
-            screenOptions={{
-                headerShown: false,
-                tabBarStyle: {
-                    backgroundColor: 'white',
-                    borderTopWidth: 1,
-                    borderTopColor: '#e0e0e0',
-                    height: 60,
-                },
-                tabBarActiveTintColor: '#007AFF',
-                tabBarInactiveTintColor: '#666666',
-            }}
-        >
-            <Tab.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{
-                    tabBarLabel: 'Home',
-                    tabBarIcon: ({ color, size }) => (
-                        <Text style={{ fontSize: 24, color }}>🏠</Text>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Search"
-                component={SearchScreen}
-                options={{
-                    tabBarLabel: 'Search',
-                    tabBarIcon: ({ color, size }) => (
-                        <Text style={{ fontSize: 24, color }}>🔍</Text>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="QRCode"
-                component={QRCodeScreen}
-                options={{
-                    tabBarLabel: 'QR Code',
-                    tabBarIcon: ({ color, size }) => (
-                        <Text style={{ fontSize: 24, color }}>📷</Text>
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Profile"
-                component={ProfileScreen}
-                options={{
-                    tabBarLabel: 'Profile',
-                    tabBarIcon: ({ color, size }) => (
-                        <Text style={{ fontSize: 24, color }}>👤</Text>
-                    ),
-                }}
-            />
-            {/* UserProfileScreen просто импортирован в файле, но НЕ добавлен в навигацию */}
-        </Tab.Navigator>
-    );
+  const {top, bottom} = useSafeAreaInsets();
+
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          paddingTop: top,
+          paddingBottom: bottom,
+        },
+      ]}>
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: 'white',
+            borderTopWidth: 1,
+            borderTopColor: '#e0e0e0',
+            height: 60,
+          },
+          tabBarActiveTintColor: '#007AFF',
+          tabBarInactiveTintColor: '#666666',
+        }}>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: homeIcon,
+          }}
+        />
+
+        <Tab.Screen
+          name="Search"
+          component={SearchScreen}
+          options={{
+            tabBarLabel: 'Search',
+            tabBarIcon: searchIcon,
+          }}
+        />
+
+        <Tab.Screen
+          name="QRCode"
+          component={QRCodeScreen}
+          options={{
+            tabBarLabel: 'QR Code',
+            tabBarIcon: qrCodeIcon,
+          }}
+        />
+
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: profileIcon,
+          }}
+        />
+
+        <Tab.Screen
+          name="Scanner"
+          component={Scanner}
+          options={{
+            tabBarLabel: 'Scanner',
+            tabBarIcon: scannerIcon,
+          }}
+        />
+      </Tab.Navigator>
+    </View>
+  );
 }
