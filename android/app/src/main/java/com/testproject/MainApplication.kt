@@ -1,30 +1,27 @@
 package com.testproject
 
 import android.app.Application
+import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
-import com.facebook.react.ReactNativeHost
-import com.facebook.react.ReactPackage
-import com.facebook.react.shell.MainReactPackage
-import com.facebook.soloader.SoLoader
+import com.facebook.react.ReactHost
+import com.facebook.react.ReactNativeApplicationEntryPoint.loadReactNative
+import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 
 class MainApplication : Application(), ReactApplication {
 
-  private val mReactNativeHost = object : ReactNativeHost(this) {
-    override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
-
-    override fun getPackages(): List<ReactPackage> {
-      val packages = mutableListOf<ReactPackage>(MainReactPackage())
-      // Add your packages here
-      return packages
-    }
-
-    override fun getJSMainModuleName(): String = "index"
+  override val reactHost: ReactHost by lazy {
+    getDefaultReactHost(
+      context = applicationContext,
+      packageList =
+        PackageList(this).packages.apply {
+          // Packages that cannot be autolinked yet can be added manually here, for example:
+          // add(MyReactNativePackage())
+        },
+    )
   }
-
-  override fun getReactNativeHost(): ReactNativeHost = mReactNativeHost
 
   override fun onCreate() {
     super.onCreate()
-    SoLoader.init(this, /* native exopackage */ false)
+    loadReactNative(this)
   }
 }
