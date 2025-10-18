@@ -6,7 +6,7 @@ import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import QRCodeScreen from './screens/QRCodeScreen';
 import ProfileScreen from './screens/ProfileScreen';
-
+import Scanner from './screens/Scanner';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
@@ -27,7 +27,9 @@ const QRCodeIcon = ({color}: {color: string}) => (
 const ProfileIcon = ({color}: {color: string}) => (
   <Text style={[styles.iconText, {color}]}>👤</Text>
 );
-
+const ScannerIcon = ({color}: {color: string}) =>(
+  <Text style ={[styles.iconText, {color}]}>📸</Text>
+);
 
 
 // Функции для tabBarIcon
@@ -35,7 +37,7 @@ const homeIcon = ({color}: {color: string}) => <HomeIcon color={color} />;
 const searchIcon = ({color}: {color: string}) => <SearchIcon color={color} />;
 const qrCodeIcon = ({color}: {color: string}) => <QRCodeIcon color={color} />;
 const profileIcon = ({color}: {color: string}) => <ProfileIcon color={color} />;
-
+const scannerIcon = ({color}: {color: string}) => <ScannerIcon color={color} />;
 
 const styles = StyleSheet.create({
   container: {
@@ -105,6 +107,15 @@ export default function TabNavigator() {
             tabBarIcon: profileIcon,
           }}
         />
+        <Tab.Screen
+        name="Scanner"
+          component={Scanner}
+          options={{
+            tabBarLabel: 'Scanner',
+            tabBarIcon: scannerIcon,
+          }}
+          />
+        
       </Tab.Navigator>
     </View>
   );
