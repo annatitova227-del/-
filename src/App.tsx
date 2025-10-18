@@ -11,11 +11,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import UserProfileScreen from './UserProfileScreen';
 import TabNavigator from './TabNavigator';
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  
+
   return (
     <SafeAreaProvider>
       <NavigationContainer>
